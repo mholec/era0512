@@ -1,0 +1,205 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 79kj9ijbhrxtr
+info:
+  title: Courses
+  version: '1.0'
+  contact:
+    name: Miroslav Holec
+    email: mirek@miroslavholec.cz
+  description: API pro správu kurzů
+servers:
+  - url: 'https://localhost:3000'
+    description: Local
+  - url: 'https://restdemo.miroslavholec.cz'
+    description: Production
+paths:
+  '/courses/{id}':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get Courses
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+              examples:
+                Default:
+                  value:
+                    id: 1
+                    title: Výchozí kurz
+                    price: 900
+                    date: '2019-08-24T14:15:22Z'
+                    attendees: 10
+                    rating: 10
+                Empty:
+                  value:
+                    id: 2
+                    title: Prázdný kurz
+                    price: 900
+                    date: '2019-08-24T14:15:22Z'
+                    attendees: 0
+                    rating: 0
+        '500':
+          $ref: '#/components/responses/500-InternalServerError'
+      operationId: GetCourseById
+      description: ''
+  /courses:
+    get:
+      summary: Get Courses
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Courses'
+              examples: {}
+        '500':
+          $ref: '#/components/responses/500-InternalServerError'
+      operationId: GetCourses
+    post:
+      summary: Create Course
+      operationId: CreateCourse
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '500':
+          $ref: '#/components/responses/500-InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseCreate'
+        description: ''
+components:
+  schemas:
+    Course:
+      title: Course
+      x-stoplight:
+        id: xu8ydriz7hd99
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+          x-stoplight:
+            id: faiutxmh39t7j
+        price:
+          type: number
+          x-stoplight:
+            id: v3qp1l8ize0af
+          format: double
+          minimum: 0
+          maximum: 80000
+          description: uvedena v czk
+        date:
+          type: string
+          x-stoplight:
+            id: 86k61d9h2i25x
+          format: date-time
+        attendees:
+          type: integer
+          x-stoplight:
+            id: x8wczycjdihhf
+          format: int32
+          minimum: 0
+        rating:
+          type: integer
+          x-stoplight:
+            id: 8z673vgfitiou
+          minimum: 0
+          maximum: 10
+      x-examples:
+        Default:
+          id: 1
+          title: Nový kurz
+          price: 9000
+          date: '2019-08-24T14:15:22Z'
+          attendees: 8
+          rating: 10
+      description: Detail kurzu
+    Courses:
+      title: Courses
+      x-stoplight:
+        id: u4hclg9al5nat
+      type: object
+      properties:
+        totalItems:
+          type: integer
+          x-stoplight:
+            id: h7x38iw4lnfmd
+          format: int32
+        items:
+          type: array
+          x-stoplight:
+            id: 9g2dn9abtzzo0
+          items:
+            $ref: '#/components/schemas/Course'
+    CourseCreate:
+      title: CourseCreate
+      x-stoplight:
+        id: htblt4alqlzof
+      type: object
+      properties:
+        title:
+          type: string
+          x-stoplight:
+            id: fb9ggm19zpmlw
+          minLength: 2
+          maxLength: 20
+        price:
+          type: number
+          x-stoplight:
+            id: n174qq3uq01i7
+          format: double
+        date:
+          type: string
+          x-stoplight:
+            id: k4nvoidavto1p
+          format: date-time
+      required:
+        - title
+        - price
+        - date
+    ProblemDetails:
+      title: ProblemDetails
+      x-stoplight:
+        id: dvdppmfxltthe
+      type: object
+      properties:
+        type:
+          type: string
+          x-stoplight:
+            id: kzbgxdb0djq1o
+        title:
+          type: string
+          x-stoplight:
+            id: 0gi9azyeerhbl
+      description: Obecná chybová struktura
+  responses:
+    500-InternalServerError:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          examples:
+            Standard:
+              value:
+                type: 'https://ddds'
+                title: Internal Server Errror
