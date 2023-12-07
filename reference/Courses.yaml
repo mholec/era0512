@@ -51,7 +51,7 @@ paths:
                     attendees: 0
                     rating: 0
         '500':
-          $ref: '#/components/responses/500-InternalServerError'
+          $ref: '#/components/responses/ProblemDetails'
       operationId: GetCourseById
       description: ''
       tags:
@@ -68,7 +68,7 @@ paths:
                 $ref: '#/components/schemas/Courses'
               examples: {}
         '500':
-          $ref: '#/components/responses/500-InternalServerError'
+          $ref: '#/components/responses/ProblemDetails'
       operationId: GetCourses
       parameters:
         - $ref: '#/components/parameters/take'
@@ -86,7 +86,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Course'
         '500':
-          $ref: '#/components/responses/500-InternalServerError'
+          $ref: '#/components/responses/ProblemDetails'
       requestBody:
         content:
           application/json:
@@ -103,13 +103,24 @@ components:
       x-stoplight:
         id: xu8ydriz7hd99
       type: object
+      x-examples:
+        Default:
+          id: 1
+          title: Název kurzu
+          price: 900
+          date: '2019-08-24T14:15:22Z'
+          attendees: 1
+          rating: 5
+      description: Detail kurzu
       properties:
         id:
           type: integer
+          example: 1
         title:
           type: string
           x-stoplight:
             id: faiutxmh39t7j
+          example: Název kurzu
         price:
           type: number
           x-stoplight:
@@ -118,6 +129,7 @@ components:
           minimum: 0
           maximum: 80000
           description: uvedena v czk
+          example: 900
         date:
           type: string
           x-stoplight:
@@ -129,21 +141,14 @@ components:
             id: x8wczycjdihhf
           format: int32
           minimum: 0
+          example: 1
         rating:
           type: integer
           x-stoplight:
             id: 8z673vgfitiou
           minimum: 0
           maximum: 10
-      x-examples:
-        Default:
-          id: 1
-          title: Nový kurz
-          price: 9000
-          date: '2019-08-24T14:15:22Z'
-          attendees: 8
-          rating: 10
-      description: Detail kurzu
+          example: 5
     Courses:
       title: Courses
       x-stoplight:
