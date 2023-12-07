@@ -240,3 +240,4 @@ components:
         minimum: 0
         format: int32
       description: Počet položek k přeskočení
+  examples: {}
