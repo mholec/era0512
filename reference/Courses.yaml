@@ -25,7 +25,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get Courses
+      summary: Get Course
       responses:
         '200':
           description: OK
@@ -53,7 +53,7 @@ paths:
         '500':
           $ref: '#/components/responses/ProblemDetails'
       operationId: GetCourseById
-      description: ''
+      description: Získání kurzu
       tags:
         - Courses
   /courses:
@@ -75,6 +75,7 @@ paths:
         - $ref: '#/components/parameters/skip'
       tags:
         - Courses
+      description: Získání seznamu kurzů
     post:
       summary: Create Course
       operationId: CreateCourse
@@ -95,6 +96,7 @@ paths:
         description: ''
       tags:
         - Courses
+      description: Vytvoření nového kurzu
     parameters: []
 components:
   schemas:
