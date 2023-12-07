@@ -67,6 +67,9 @@ paths:
         '500':
           $ref: '#/components/responses/500-InternalServerError'
       operationId: GetCourses
+      parameters:
+        - $ref: '#/components/parameters/take'
+        - $ref: '#/components/parameters/skip'
     post:
       summary: Create Course
       operationId: CreateCourse
@@ -85,6 +88,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CourseCreate'
         description: ''
+    parameters: []
 components:
   schemas:
     Course:
@@ -203,3 +207,22 @@ components:
               value:
                 type: 'https://ddds'
                 title: Internal Server Errror
+  parameters:
+    take:
+      name: take
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 10
+        format: int32
+    skip:
+      name: skip
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        format: int32
