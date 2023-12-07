@@ -14,7 +14,7 @@ tags:
 servers:
   - url: 'https://localhost:3000'
     description: Local
-  - url: 'https://restdemo.miroslavholec.cz'
+  - url: 'https://restdemo.miroslavholec.cz/api'
     description: Production
 paths:
   '/courses/{id}':
@@ -203,8 +203,8 @@ components:
             id: 0gi9azyeerhbl
       description: Obecná chybová struktura
   responses:
-    500-InternalServerError:
-      description: Example response
+    ProblemDetails:
+      description: Obecná chybová struktura
       content:
         application/json:
           schema:
@@ -224,6 +224,7 @@ components:
         minimum: 0
         default: 10
         format: int32
+      description: Počet položek k načtení
     skip:
       name: skip
       in: query
@@ -233,3 +234,4 @@ components:
         default: 0
         minimum: 0
         format: int32
+      description: Počet položek k přeskočení
