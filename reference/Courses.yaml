@@ -50,6 +50,8 @@ paths:
                     date: '2019-08-24T14:15:22Z'
                     attendees: 0
                     rating: 0
+        '404':
+          $ref: '#/components/responses/ProblemDetails'
         '500':
           $ref: '#/components/responses/ProblemDetails'
       operationId: GetCourseById
