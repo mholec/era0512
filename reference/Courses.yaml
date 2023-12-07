@@ -25,7 +25,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get Course
+      summary: Get Course By ID
       responses:
         '200':
           description: OK
